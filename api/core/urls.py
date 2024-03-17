@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import MedsPriceView
+from .views import PmvgDataInsertView
 
 urlpatterns = [
-    path('', MedsPriceView.as_view())
+    path('resources/pmvg-data/insert/', PmvgDataInsertView.as_view())
 ]
