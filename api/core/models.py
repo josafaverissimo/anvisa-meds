@@ -31,4 +31,4 @@ class LaboratoriesMeds(models.Model):
     laboratory = models.ForeignKey('Laboratories', on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'am_meds_laboratories'
+        db_table = 'am_laboratories_meds'
