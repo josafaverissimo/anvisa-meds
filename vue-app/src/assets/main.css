@@ -1,0 +1,59 @@
+@import './reset.css';
+@import './fonts.css';
+
+:root {
+  /* Utilities */
+  --padding-sm: 0.5rem;
+  --padding-md: 2rem;
+  --padding-lg: 3rem;
+
+  /* Font Family */
+  --font-family-title: 'Josefin Sans';
+
+  /* Sizes */
+  --size-text-sm: 0.8rem;
+  --size-text-md: 1.3rem;
+  --size-text-lg: 2rem;
+  --size-toast: 25rem;
+
+  /* Border */
+  --border: 1px solid var(--color-light-shade);
+  --border-radius-xs: 0.5rem;
+  --border-radius-sm: 1rem;
+  --border-radius-md: 2rem;
+  --border-radius-lg: 3rem;
+  --border-radius-circle: 50%;
+
+  /* Colors */
+  --color-primary: #0336ff;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-success: #008b00;
+  --color-warning: #ffde03;
+  --color-danger: #b00020;
+
+  &[data-theme='light'] {
+    /* Colors */
+    --color-text: #000;
+    --color-background: #fff;
+    --color-light-shade: #e0e0e0;
+  }
+
+  &[data-theme='dark'] {
+    /* Colors */
+    --color-primary: #2541b2;
+    --color-text: #fff;
+    --color-background: #151515;
+    --color-light-shade: #333;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+
+  svg {
+    fill: var(--color-text);
+  }
+}
