@@ -32,7 +32,10 @@ class MedsView(APIView):
         page = int(request.GET.get('page', FIRST_PAGE))
         page = page if page >= FIRST_PAGE else FIRST_PAGE
 
+        data = laboratories_meds_repository.get_by_page(page)
+        response_http_status = status.HTTP_200_OK if len(data['data']) > 0 else status.HTTP_204_NO_CONTENT
+
         return Response(
-            data=laboratories_meds_repository.get_by_page(page),
-            status=status.HTTP_200_OK
+            data=data,
+            status=response_http_status
         )
