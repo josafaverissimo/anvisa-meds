@@ -8,6 +8,6 @@ class PmvgDataInsertView(APIView):
     def post(self, request):
         pmvg_data_service = PmvgDataService()
 
-        pmvg_data_service.insert_pmvg_data_in_database()
-
-        return Response('Stored')
+        return Response({
+            "success": pmvg_data_service.insert_pmvg_data_in_database()
+        })
