@@ -1,0 +1,7 @@
+asgiref==3.7.2
+Django==5.0.3
+djangorestframework==3.15.0
+psycopg==3.1.18
+sqlparse==0.4.4
+typing_extensions==4.10.0
+xlrd==2.0.1
