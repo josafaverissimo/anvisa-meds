@@ -10,7 +10,12 @@ class PmvgDataInsertView(APIView):
         pmvg_data_service = PmvgDataService()
 
         success_store_pmvg_data_in_data_base = pmvg_data_service.insert_pmvg_data_in_database()
-        response_http_status = status.HTTP_201_CREATED if pmvg_data_service else status.HTTP_500_INTERNAL_SERVER_ERROR
+        response_http_status: int
+
+        if success_store_pmvg_data_in_data_base:
+            response_http_status = status.HTTP_201_CREATED
+        else:
+            response_http_status = status.HTTP_500_INTERNAL_SERVER_ERROR
 
         return Response(
             data={"success": success_store_pmvg_data_in_data_base},
