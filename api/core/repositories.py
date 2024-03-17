@@ -1,7 +1,12 @@
+import math
+
 import xlrd
 
-from .settings import PMVG_FILE_PATH, PMVG_COLUMNS
+from .settings import PMVG_FILE_PATH, PMVG_COLUMNS, MEDS_ITEMS_PER_PAGE
 from .models import Substances, Meds, Laboratories, LaboratoriesMeds
+
+from django.db.models import F, Count
+from django.db.models.functions import Concat
 
 
 class MedsPriceRepository:
@@ -82,6 +87,8 @@ class LaboratoriesRepository:
 
 
 class LaboratoriesMedsRepository:
+    ITEMS_PER_PAGE = MEDS_ITEMS_PER_PAGE
+
     def save(self, laboratory_id: int, med_id: int):
         stored_laboratory_med = LaboratoriesMeds.objects.filter(
             laboratory_id=laboratory_id,
@@ -96,3 +103,26 @@ class LaboratoriesMedsRepository:
         laboratories_meds.save()
 
         return laboratories_meds.id
+
+    def get_total_pages(self):
+        query = LaboratoriesMeds.objects.select_related('laboratory', 'med__substance') \
+          .annotate(concatenated_name=Concat(F('med__substance__name'), F('laboratory__name'))) \
+          .aggregate(total_pages=Count('concatenated_name', distinct=True))
+
+        return math.ceil(query['total_pages'] / self.ITEMS_PER_PAGE)
+
+    def get_by_page(self, page: int = 1):
+        offset = (page - 1) * self.ITEMS_PER_PAGE
+        limit = self.ITEMS_PER_PAGE * page
+
+        query = LaboratoriesMeds.objects.select_related('laboratory', 'med__substance')
+        result = query.all().values(
+            lab_name=F('laboratory__name'),
+            lab_cnpj=F('laboratory__cnpj'),
+            substance_name=F('med__substance__name')
+        ).distinct()[offset:limit]
+
+        return {
+            'total_pages': self.get_total_pages(),
+            'data': result
+        }
