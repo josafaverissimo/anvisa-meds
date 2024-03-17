@@ -13,3 +13,5 @@ PMVG_COLUMNS = {
     'fabric_price_no_taxes': 13,
     'max_sale_price_government': 34
 }
+
+MEDS_ITEMS_PER_PAGE = 25
