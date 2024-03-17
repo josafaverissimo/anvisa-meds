@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .services import PmvgDataService
+from .repositories import LaboratoriesMedsRepository
 
 
 class PmvgDataInsertView(APIView):
@@ -20,4 +21,18 @@ class PmvgDataInsertView(APIView):
         return Response(
             data={"success": success_store_pmvg_data_in_data_base},
             status=response_http_status
+        )
+
+
+class MedsView(APIView):
+    def get(self, request):
+        FIRST_PAGE = 1
+
+        laboratories_meds_repository = LaboratoriesMedsRepository()
+        page = int(request.GET.get('page', FIRST_PAGE))
+        page = page if page >= FIRST_PAGE else FIRST_PAGE
+
+        return Response(
+            data=laboratories_meds_repository.get_by_page(page),
+            status=status.HTTP_200_OK
         )
