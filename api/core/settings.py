@@ -3,6 +3,8 @@ from os import getcwd
 
 PMVG_FILE_PATH = f'{getcwd()}/data/pmvg.xls'
 
+LOGGER_FILE_PATH = f'{getcwd()}/core/logs/loguru.log'
+
 PMVG_COLUMNS = {
     'substance': 0,
     'cnpj': 1,
