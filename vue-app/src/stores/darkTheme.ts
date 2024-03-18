@@ -5,7 +5,7 @@ export const useThemeStore = defineStore('darkTheme', () => {
   const rootElement = document.documentElement
   const currentTheme = ref(localStorage.getItem('theme') ?? rootElement.dataset.theme)
 
-  const setTheme = (theme: 'dark' | 'light') => {
+  const setTheme = (theme: string) => {
     localStorage.setItem('theme', theme)
     currentTheme.value = theme
     rootElement.dataset.theme = theme
