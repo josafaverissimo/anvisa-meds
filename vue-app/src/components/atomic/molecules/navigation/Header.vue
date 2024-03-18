@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Title from '@/components/atomic/atoms/navigation/Title.vue'
 import ToggleThemeButton from '@/components/atomic/molecules/ToggleThemeButton.vue'
+import Logo from '@/components/atomic/atoms/Logo.vue'
 
 defineProps<{
   iconSize: number
@@ -10,7 +11,7 @@ defineProps<{
 <template>
   <header class="header">
     <div class="header__titleWrapper">
-      <img src="/logo.png" alt="">
+      <Logo />
       <Title>
         <slot name="title" />
       </Title>
@@ -27,17 +28,12 @@ defineProps<{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--color-background);
 
   .header__titleWrapper {
     display: flex;
     align-items: center;
     gap: var(--padding-sm);
-
-    img {
-      width: 3rem;
-      height: 3rem;
-      object-fit: contain;
-    }
   }
 }
 </style>
