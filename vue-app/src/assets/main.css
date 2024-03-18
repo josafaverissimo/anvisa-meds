@@ -7,6 +7,10 @@
   --padding-md: 2rem;
   --padding-lg: 3rem;
 
+  /* Box Shadows */
+  --shadow-sm: 3px 3px 1rem var(--color-light-shade);
+  --shadow-md: 3px 3px 1rem 0.5rem var(--color-light-shade);
+
   /* Font Family */
   --font-family-title: 'Josefin Sans';
 
@@ -17,7 +21,7 @@
   --size-toast: 25rem;
 
   /* Border */
-  --border: 1px solid var(--color-light-shade);
+  --border: 1px solid var(--color-dark-shade);
   --border-radius-xs: 0.5rem;
   --border-radius-sm: 1rem;
   --border-radius-md: 2rem;
@@ -25,7 +29,7 @@
   --border-radius-circle: 50%;
 
   /* Colors */
-  --color-primary: #0336ff;
+  --color-primary: #2541b2;
   --color-white: #fff;
   --color-black: #000;
   --color-success: #008b00;
@@ -36,22 +40,25 @@
     /* Colors */
     --color-text: #000;
     --color-background: #fff;
+    --color-background-content: #f7f7f7;
     --color-light-shade: #e0e0e0;
+    --color-dark-shade: #e0e0e0;
   }
 
   &[data-theme='dark'] {
     /* Colors */
-    --color-primary: #2541b2;
     --color-text: #fff;
-    --color-background: #151515;
-    --color-light-shade: #333;
+    --color-background: #171717;
+    --color-background-content: #121212;
+    --color-light-shade: #1a1a1a;
+    --color-dark-shade: #333;
   }
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: var(--color-background-content);
 
   svg {
     fill: var(--color-text);
