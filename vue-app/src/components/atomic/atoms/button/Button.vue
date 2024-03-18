@@ -14,7 +14,8 @@ defineProps<{
 .btn {
   background: transparent;
   border: none;
-  padding: 0;
+  padding: var(--padding-sm);
+  border-radius: var(--border-radius-xs);
 
   &.pointer {
     cursor: pointer;
