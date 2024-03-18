@@ -6,7 +6,7 @@ interface ToastHashMap {
   [key: string]: ToastItem
 }
 
-interface ToastItem {
+export interface ToastItem {
   id?: string
   message: string
   status?: string
@@ -47,8 +47,8 @@ defineExpose({ push })
 <style scoped>
 .toastContainer {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: .5rem;
+  right: 2rem;
   width: var(--size-toast);
 }
 </style>
