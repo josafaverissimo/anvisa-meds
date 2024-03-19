@@ -6,6 +6,7 @@ import Header from '@/components/atomic/molecules/navigation/Header.vue'
 import type { TableMetaData } from "@/components/atomic/organisms/table/Table.vue";
 import Table from '@/components/atomic/organisms/table/Table.vue'
 import ToastContainer from '@/components/atomic/molecules/ToastContainer.vue'
+import { useTableFiltersStore } from '@/stores/tableFilters';
 
 defineProps<{
   iconSize: number
@@ -21,6 +22,8 @@ interface TableData {
 const FIRST_PAGE = 1
 
 const medsRepository = new MedsRepository()
+
+const { filters } = useTableFiltersStore()
 
 const toastContainer = ref<InstanceType<typeof ToastContainer> | null>(null)
 
@@ -74,12 +77,7 @@ function filterHandler(tableMetaData: TableMetaData) {
 onMounted(() => {
   setTableData({
     page: FIRST_PAGE,
-    filters: {
-      medSubstance: '',
-      laboratoryName: '',
-      laboratoryCnpj: '',
-      term: ''
-    }
+    filters
   })
 })
 </script>
