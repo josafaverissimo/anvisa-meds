@@ -11,9 +11,6 @@ from django.db.models.functions import Concat
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 
 
-from typing import Optional
-
-
 class MedsPriceRepository:
     COLUMNS_ROW_INDEX = 52
     DATA_ROW_INDEX = 54
@@ -123,7 +120,7 @@ class LaboratoriesMedsRepository:
 
         return math.ceil(result['total_pages'] / self.ITEMS_PER_PAGE)
 
-    def get_query(self, search_dto: Optional[LaboratoriesMedsSearchDto] = None):
+    def get_query(self, search_dto: LaboratoriesMedsSearchDto | None = None):
         query = self.base_query()
 
         if search_dto is not None:
@@ -144,9 +141,9 @@ class LaboratoriesMedsRepository:
                     Q(similarity_substance_name__gt=0)
                 ).order_by(
                     '-rank',
-                    '-similarity_laboratory_name',
-                    '-similarity_laboratory_cnpj',
                     '-similarity_substance_name'
+                    '-similarity_laboratory_name',
+                    '-similarity_laboratory_cnpj'
                 )
 
             return query.filter(
@@ -157,7 +154,7 @@ class LaboratoriesMedsRepository:
 
         return query
 
-    def get_by_page(self, page: int = 1, search_dto: Optional[LaboratoriesMedsSearchDto] = None):
+    def get_by_page(self, page: int = 1, search_dto: LaboratoriesMedsSearchDto | None = None):
         search_dto = search_dto if search_dto is not None else LaboratoriesMedsSearchDto()
 
         offset = (page - 1) * self.ITEMS_PER_PAGE

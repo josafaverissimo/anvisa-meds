@@ -12,8 +12,8 @@ from .repositories import \
     LaboratoriesRepository, \
     LaboratoriesMedsRepository
 
-logger.add(LOGGER_FILE_PATH)
 
+logger.add(LOGGER_FILE_PATH)
 
 class PmvgDataService:
     def insert_pmvg_data_in_database(self) -> bool:
