@@ -8,8 +8,8 @@
   --padding-lg: 3rem;
 
   /* Box Shadows */
-  --shadow-sm: 3px 3px 1rem var(--color-light-shade);
-  --shadow-md: 3px 3px 1rem 0.5rem var(--color-light-shade);
+  --shadow-sm: 3px 3px 1rem var(--color-dark-shade);
+  --shadow-md: 3px 3px 1rem 0.5rem var(--color-dark-shade);
 
   /* Font Family */
   --font-family-title: 'Josefin Sans';
@@ -21,7 +21,7 @@
   --size-toast: 25rem;
 
   /* Border */
-  --border: 1px solid var(--color-dark-shade);
+  --border-thin: 1px solid var(--color-light-shade);
   --border-radius-xs: 0.5rem;
   --border-radius-sm: 1rem;
   --border-radius-md: 2rem;
@@ -38,7 +38,8 @@
 
   &[data-theme='light'] {
     /* Colors */
-    --color-text: #000;
+    --color-text: #444;
+    --color-text-accent: #000;
     --color-background: #fff;
     --color-background-content: #f7f7f7;
     --color-light-shade: #e0e0e0;
@@ -47,11 +48,14 @@
 
   &[data-theme='dark'] {
     /* Colors */
-    --color-text: #fff;
+    --color-text: #ccc;
+    --color-text-accent: #fff;
     --color-background: #171717;
     --color-background-content: #121212;
-    --color-light-shade: #1a1a1a;
-    --color-dark-shade: #333;
+    --color-light-shade: #222;
+    --color-dark-shade: #1b1b1b;
+    --color-primary: #2949ca;
+    --color-danger: #e70b33;
   }
 }
 
@@ -59,8 +63,4 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--color-text);
   background-color: var(--color-background-content);
-
-  svg {
-    fill: var(--color-text);
-  }
 }
