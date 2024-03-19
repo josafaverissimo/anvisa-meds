@@ -7,6 +7,9 @@
 Página web para visualizar a lista de medicamentos da planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos).
 Através da aplicação é possível filtrar por Substância, Laboratório e Cnpj.
 
+![App](https://github.com/josafaverissimo/anvisa-meds/assets/50150682/a1b67f4e-d7b3-4726-beb2-b1fa0b004e62)
+
+
 ## Instruções
 
 ### Backend
