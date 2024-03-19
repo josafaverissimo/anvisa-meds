@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  django:
+    container_name: django
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - './api:/api'
+    env_file:
+      - './docker/psql/.env'
+    depends_on:
+      - postgres
+  postgres:
+    container_name: psql
+    image: postgres:16-alpine3.19
+    volumes:
+      - './docker/data/postgres/data:/var/lib/postgresql/data'
+    env_file:
+      - './docker/psql/.env'
+
