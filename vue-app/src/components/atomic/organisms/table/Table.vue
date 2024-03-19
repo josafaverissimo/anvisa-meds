@@ -7,13 +7,8 @@ import Input from '@/components/atomic/atoms/Input.vue'
 import Button from '@/components/atomic/atoms/button/Button.vue'
 import Icon from "@/components/atomic/atoms/Icon.vue";
 import Spinner from "@/components/atomic/atoms/Spinner.vue";
-
-interface Filters {
-  medSubstance: string
-  laboratoryName: string
-  laboratoryCnpj: string
-  term: string
-}
+import type { Filters } from '@/stores/tableFilters';
+import { useTableFiltersStore } from '@/stores/tableFilters';
 
 export interface TableMetaData {
   page: number
@@ -37,12 +32,7 @@ const emits = defineEmits<{
 
 const MAX_ROW_LENGTH = 50
 
-const filters = reactive<Filters>({
-  medSubstance: '',
-  laboratoryName: '',
-  laboratoryCnpj: '',
-  term: ''
-})
+const { filters } = useTableFiltersStore()
 
 const rowsTitle = reactive<{data: Map<number, string>}>({
   data: new Map()
@@ -94,6 +84,16 @@ function filter() {
   })
 }
 
+function clearFilters() {
+  for(let filter in filters) {
+    filters[filter as keyof Filters] = ''
+  }
+
+  const FIRST_PAGE = 1
+
+  changePage(FIRST_PAGE)
+}
+
 </script>
 
 <template>
@@ -133,14 +133,17 @@ function filter() {
           <Input
               id="full_text_search"
               icon="Search"
-              placeholder="Busca Geral"
+              placeholder="Busca Inteligente"
               type="search"
               v-model="filters.term"
           />
         </div>
 
         <div class="myTable__header__filterWrapper">
-          <Button class="pointer primary filterBtn" @click="filter">Buscar</Button>
+          <Button class="pointer clearSearchBtn light bordered circle danger" @click="clearFilters">
+            <Icon icon="Close" :size="1" color="danger" />
+          </Button>
+          <Button class="pointer filterBtn light bordered primary" @click="filter">Buscar</Button>
         </div>
       </div>
 
@@ -167,6 +170,8 @@ function filter() {
       </div>
 
       <div class="myTable__footer">
+        <span class="itemsPerPage">Listando {{ computedRows.length }} itens</span>
+
         <Button class="pointer" @click="changePage(currentPage - 1)">
           <Icon icon="Previous" :size="2"/>
         </Button>
@@ -207,6 +212,7 @@ function filter() {
 
 .myTable__spinner {
   position: absolute;
+  z-index: 9;
 }
 
 .myTable {
@@ -233,9 +239,19 @@ function filter() {
     .myTable__header__filterWrapper {
       display: flex;
       justify-content: center;
+      align-items: center;
+      gap: var(--padding-sm);
+
+      .clearSearchBtn {
+        width: 2.3rem;
+        height: 2.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
       .filterBtn {
-        width: 15%;
+        width: 10%;
         font-size: var(--size-text-md);
       }
     }
@@ -243,7 +259,7 @@ function filter() {
 
   .myTable__body {
     background-color: var(--color-background);
-    border: thin solid var(--color-light-shade);
+    border: var(--border-thin);
     border-top-left-radius: var(--border-radius-sm);
     border-top-right-radius: var(--border-radius-sm);
     height: 50vh;
@@ -263,6 +279,10 @@ function filter() {
         }
       }
 
+      td {
+        cursor: cell;
+      }
+
       thead {
         position: sticky;
         top: 0;
@@ -271,14 +291,14 @@ function filter() {
 
         tr {
           th {
-            border-bottom: thin solid var(--color-light-shade);
+            border-bottom: var(--border-thin);
           }
         }
       }
 
       tbody {
         tr:not(:last-child) {
-          border-bottom: thin solid var(--color-light-shade);
+          border: var(--border-thin);
         }
 
         tr:nth-child(2n - 1) {
@@ -291,7 +311,9 @@ function filter() {
   .myTable__footer {
     background-color: var(--color-background);
     border-bottom-left-radius: var(--border-radius-sm);
-    border-bottom-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);    
+    border: var(--border-thin);
+    border-top: none;
 
     display: flex;
     justify-content: flex-end;
@@ -303,7 +325,11 @@ function filter() {
     .myTable__footer__currentPage {
       margin: 0 var(--padding-sm);
       padding: var(--padding-sm);
-    }
+    }    
+
+    .itemsPerPage {
+        font-size: var(--size-text-sm);
+      }
   }
 }
 </style>
