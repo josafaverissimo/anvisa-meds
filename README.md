@@ -1,4 +1,11 @@
 # Anvisa Meds
+![version](https://img.shields.io/badge/Version-v1.2.1-green)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![vue](https://img.shields.io/badge/Vue.js-blue)
+![django](https://img.shields.io/badge/Django-blue)
+
+Página web para visualizar a lista de medicamentos da planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos).
+Através da aplicação é possível filtrar por Substância, Laboratório e Cnpj.
 
 ## Instruções
 
@@ -47,4 +54,7 @@ O servidor irá rodar na porta 9090.
 
 Basta abrir o navegador na url: http://localhost:9090
 
-    
+### Atualizando os dados
+
+Basta baixar a planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos) e coloca-la no diretório
+api/data nomeada como pmvg.xls
