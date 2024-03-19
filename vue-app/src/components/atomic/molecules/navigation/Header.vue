@@ -24,7 +24,7 @@ defineProps<{
 <style scoped>
 .header {
   padding: var(--padding-sm);
-  border-bottom: 1px solid var(--color-light-shade);
+  border: var(--border-thin);
   display: flex;
   justify-content: space-between;
   align-items: center;
