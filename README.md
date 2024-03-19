@@ -1,11 +1,14 @@
 # Anvisa Meds
-![version](https://img.shields.io/badge/Version-v1.2.3-green)
+![version](https://img.shields.io/badge/Version-v1.2.1-green)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![vue](https://img.shields.io/badge/Vue.js-blue)
 ![django](https://img.shields.io/badge/Django-blue)
 
 Página web para visualizar a lista de medicamentos da planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos).
 Através da aplicação é possível filtrar por Substância, Laboratório e Cnpj.
+
+![App](https://github.com/josafaverissimo/anvisa-meds/assets/50150682/a1b67f4e-d7b3-4726-beb2-b1fa0b004e62)
+
 
 ## Instruções
 
@@ -57,4 +60,5 @@ Basta abrir o navegador na url: http://localhost:9090
 ### Atualizando os dados
 
 Basta baixar a planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos) e coloca-la no diretório
-api/data nomeada como pmvg.xls
+api/data nomeada como pmvg.xls e acessar a url: http://localhost:9090/resources/pmvg-data/insert. Esse processo pode levar um bom tempo
+para ser finalizado.
