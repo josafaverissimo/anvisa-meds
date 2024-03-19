@@ -1,7 +1,6 @@
 import { reactive, watch } from 'vue'
 import { defineStore } from "pinia";
 
-
 export interface Filters {
     medSubstance: string
     laboratoryName: string
