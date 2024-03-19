@@ -34,7 +34,7 @@ const model = defineModel()
   background-color: var(--color-background);
   border-radius: var(--border-radius-sm);
   transition: all 0.5s;
-  border: thin solid var(--color-light-shade);
+  border: var(--border-thin);
 
   &:focus-within {
     box-shadow: var(--shadow-md);
