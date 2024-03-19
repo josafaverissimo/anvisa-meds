@@ -12,13 +12,13 @@ Na raiz do projeto, siga as instruções abaixo:
 
 Crie um banco de dados chamado anvisa_meds e realize as configurações do banco de dados no arquivo api/settings.py
 
-Caso queira inserir os registros manualmente (__ISSO LEVARÁ MAIS TEMPO__), execute o comando abaixo:
-
-    python manage.py migrate
-
 Para inserir os registros através do dump execute o comando abaixo:
 
     psql anvisa_meds < data/database.sql
+
+Caso queira inserir os registros manualmente (__ISSO LEVARÁ MAIS TEMPO__), execute o comando abaixo:
+
+    python manage.py migrate
 
 Agora basta subir o servidor:
 
