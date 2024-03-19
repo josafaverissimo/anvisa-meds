@@ -91,7 +91,10 @@ function clearFilters() {
 
   const FIRST_PAGE = 1
 
-  changePage(FIRST_PAGE)
+  emits('changePage', {
+    page: FIRST_PAGE,
+    filters
+  })
 }
 
 </script>
@@ -155,7 +158,7 @@ function clearFilters() {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(cells, key) in computedRows" :key="key">
+            <tr v-for="(cells, key) in computedRows" :key="key" v-if="computedRows.length > 0">
               <td
                   v-for="(cell, key) in cells"
                   :key="key"
@@ -164,6 +167,10 @@ function clearFilters() {
               >
                 {{cell}}
               </td>
+            </tr>
+
+            <tr v-else>
+              <td colspan="3">Nenhum dado encontrado</td>
             </tr>
           </tbody>
         </table>
