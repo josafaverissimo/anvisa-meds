@@ -16,14 +16,11 @@ from .repositories import \
 logger.add(LOGGER_FILE_PATH)
 
 class PmvgDataService:
-    def insert_pmvg_data_in_database(self) -> bool:
-        meds_price_repository = MedsPriceRepository()
+    def insert_pmvg_data_in_database(self, meds_price_rows: list) -> bool:
         substances_repository = SubstancesRepository()
         meds_repository = MedsRepository()
         laboratories_repository = LaboratoriesRepository()
         laboratories_meds_repository = LaboratoriesMedsRepository()
-
-        meds_price_rows = meds_price_repository.get_rows_data()
 
         for row in meds_price_rows:
             try:

@@ -3,15 +3,16 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .services import PmvgDataService
-from .repositories import LaboratoriesMedsRepository
+from .repositories import LaboratoriesMedsRepository, MedsPriceRepository
 from .dtos import LaboratoriesMedsSearchDto
 
 
 class PmvgDataInsertView(APIView):
     def post(self, request):
         pmvg_data_service = PmvgDataService()
+        meds_prices_rows = MedsPriceRepository().get_rows_data()
 
-        success_store_pmvg_data_in_data_base = pmvg_data_service.insert_pmvg_data_in_database()
+        success_store_pmvg_data_in_data_base = pmvg_data_service.insert_pmvg_data_in_database(meds_prices_rows)
         response_http_status: int
 
         if success_store_pmvg_data_in_data_base:
