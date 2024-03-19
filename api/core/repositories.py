@@ -14,17 +14,19 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 class MedsPriceRepository:
     COLUMNS_ROW_INDEX = 52
     DATA_ROW_INDEX = 54
-    sheet: xlrd.sheet.Sheet
 
     def __init__(self):
-        self.sheet = xlrd.open_workbook(PMVG_FILE_PATH).sheet_by_index(0)
+        self.sheet: xlrd.sheet.Sheet = xlrd.open_workbook(PMVG_FILE_PATH).sheet_by_index(0)
 
     def get_columns(self) -> dict:
         return self.get_row_data(self.COLUMNS_ROW_INDEX)
 
     def get_row_data(self, row_index: int) -> dict:
+        if not self.COLUMNS_ROW_INDEX <= row_index < self.sheet.nrows:
+            return {}
+
         return {
-            col_name: self.sheet.cell_value(rowx=row_index, colx=col_index)
+            col_name: str(self.sheet.cell_value(rowx=row_index, colx=col_index)).lower()
             for col_name, col_index in PMVG_COLUMNS.items()
         }
 
@@ -36,7 +38,7 @@ class MedsPriceRepository:
 
 
 class SubstancesRepository:
-    def save(self, name: str):
+    def save(self, name: str) -> int:
         name = name.lower()
 
         substance_stored = Substances.objects.filter(name=name).first()
@@ -54,10 +56,10 @@ class SubstancesRepository:
 class MedsRepository:
     def save(
         self,
-        substance_id,
-        registration,
-        fabric_price_no_taxes,
-        max_sale_price_government
+        substance_id: int,
+        registration: int,
+        fabric_price_no_taxes: float | int,
+        max_sale_price_government: float | int
     ):
         stored_med = Meds.objects.filter(registration=registration).first()
 
@@ -154,7 +156,7 @@ class LaboratoriesMedsRepository:
 
         return query
 
-    def get_by_page(self, page: int = 1, search_dto: LaboratoriesMedsSearchDto | None = None):
+    def get_by_page(self, page: int = 1, search_dto: LaboratoriesMedsSearchDto | None = None) -> dict:
         search_dto = search_dto if search_dto is not None else LaboratoriesMedsSearchDto()
 
         offset = (page - 1) * self.ITEMS_PER_PAGE
@@ -170,5 +172,5 @@ class LaboratoriesMedsRepository:
 
         return {
             'total_pages': self.get_total_pages(query),
-            'data': result
+            'data': list(result)
         }
