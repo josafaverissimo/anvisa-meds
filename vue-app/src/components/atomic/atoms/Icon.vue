@@ -13,7 +13,8 @@ const props = withDefaults(
     color?: string
   }>(),
   {
-    size: 1
+    size: 1,
+    color: 'text'
   }
 )
 

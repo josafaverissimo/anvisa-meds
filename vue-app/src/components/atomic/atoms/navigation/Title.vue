@@ -14,5 +14,6 @@ defineProps<{
 .title {
   font-size: var(--size-text-md);
   font-family: var(--font-family-title);
+  color: var(--color-text-accent);
 }
 </style>
