@@ -141,7 +141,7 @@ class LaboratoriesMedsRepository:
                     Q(similarity_substance_name__gt=0)
                 ).order_by(
                     '-rank',
-                    '-similarity_substance_name'
+                    '-similarity_substance_name',
                     '-similarity_laboratory_name',
                     '-similarity_laboratory_cnpj'
                 )
