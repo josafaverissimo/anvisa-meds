@@ -57,4 +57,5 @@ Basta abrir o navegador na url: http://localhost:9090
 ### Atualizando os dados
 
 Basta baixar a planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos) e coloca-la no diretório
-api/data nomeada como pmvg.xls
+api/data nomeada como pmvg.xls e acessar a url: http://localhost:9090/resources/pmvg-data/insert. Esse processo pode levar um bom tempo
+para ser finalizado.
