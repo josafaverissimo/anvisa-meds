@@ -8,5 +8,6 @@ while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
 done
 
 echo "✅ Postgres Database Started Successfully ($POSTGRES_HOST:$POSTGRES_PORT)"
+echo "🚀 listen 0.0.0.0:8000"
 python manage.py migrate
-python manage.py runserver
+python manage.py runserver 0.0.0.0:8000

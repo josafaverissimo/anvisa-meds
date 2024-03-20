@@ -11,14 +11,18 @@ services:
     volumes:
       - './api:/api'
     env_file:
+      - './docker/django/.env'
       - './docker/psql/.env'
     depends_on:
       - postgres
+
   postgres:
-    container_name: psql
+    container_name: postgres
     image: postgres:16-alpine3.19
     volumes:
+      - './api/data/database.sql:/docker-entrypoint-initdb.d/database.sql'
       - './docker/data/postgres/data:/var/lib/postgresql/data'
+    ports:
+      - '5000:5432'
     env_file:
       - './docker/psql/.env'
-
