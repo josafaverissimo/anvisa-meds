@@ -1,5 +1,5 @@
 # Anvisa Meds
-![version](https://img.shields.io/badge/Version-v1.2.1-green)
+![version](https://img.shields.io/badge/Version-v1.2.4-green)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![vue](https://img.shields.io/badge/Vue.js-blue)
 ![django](https://img.shields.io/badge/Django-blue)
