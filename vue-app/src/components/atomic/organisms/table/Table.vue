@@ -299,6 +299,8 @@ function clearFilters() {
         tr {
           th {
             border-bottom: var(--border-thin);
+            font-weight: bold;
+            text-transform: uppercase;
           }
         }
       }

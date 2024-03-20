@@ -1,8 +1,9 @@
 # Anvisa Meds
-![version](https://img.shields.io/badge/Version-v1.2.4-green)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![vue](https://img.shields.io/badge/Vue.js-blue)
-![django](https://img.shields.io/badge/Django-blue)
+![version](https://img.shields.io/badge/Version-v1.2.5-white)
+![License](https://img.shields.io/badge/License-MIT-black)
+![Docker](https://img.shields.io/badge/Docker-blue)
+![vue](https://img.shields.io/badge/Vue.js-55ff55)
+![django](https://img.shields.io/badge/Django-55aa55)
 
 Página web para visualizar a lista de medicamentos da planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos).
 Através da aplicação é possível filtrar por Substância, Laboratório e Cnpj.
