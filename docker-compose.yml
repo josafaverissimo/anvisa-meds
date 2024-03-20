@@ -16,6 +16,18 @@ services:
     depends_on:
       - postgres
 
+  vue:
+    container_name: vue
+    build:
+      context: .
+      dockerfile: ./docker/vue/Dockerfile
+    ports:
+      - '9090:9090'
+    volumes:
+      - './vue-app:/vue-app'
+    links:
+      - django
+
   postgres:
     container_name: postgres
     image: postgres:16-alpine3.19

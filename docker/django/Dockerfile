@@ -1,7 +1,7 @@
 FROM python:3.12-alpine3.19
 
-COPY ../../api /api
-COPY ../../scripts /scripts
+COPY ./api /api
+COPY ./docker/django/scripts /scripts
 
 WORKDIR /api
 
