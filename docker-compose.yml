@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  django:
+    container_name: django
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - './api:/api'
+    env_file:
+      - './docker/django/.env'
+      - './docker/psql/.env'
+    depends_on:
+      - postgres
+
+  vue:
+    container_name: vue
+    build:
+      context: .
+      dockerfile: ./docker/vue/Dockerfile
+    ports:
+      - '9090:9090'
+    volumes:
+      - './vue-app:/vue-app'
+    links:
+      - django
+
+  postgres:
+    container_name: postgres
+    image: postgres:16-alpine3.19
+    volumes:
+      - './api/data/database.sql:/docker-entrypoint-initdb.d/database.sql'
+      - './docker/data/postgres/data:/var/lib/postgresql/data'
+    ports:
+      - '5000:5432'
+    env_file:
+      - './docker/psql/.env'

@@ -1,5 +1,5 @@
 # Anvisa Meds
-![version](https://img.shields.io/badge/Version-v1.2.1-green)
+![version](https://img.shields.io/badge/Version-v1.2.4-green)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![vue](https://img.shields.io/badge/Vue.js-blue)
 ![django](https://img.shields.io/badge/Django-blue)
@@ -11,8 +11,18 @@ Através da aplicação é possível filtrar por Substância, Laboratório e Cnp
 
 
 ## Instruções
+É possível implantar a aplicação manualmente ou com docker. Basta seguir os passos mostrados abaixo.
 
-### Backend
+### Docker
+Na raiz do projeto execute o comando:
+
+    docker compose up --build
+
+O comando acima também já cria o banco de dados e insere os dados contidos no
+arquivo /api/data/database.sql.
+
+### Implantação manual
+#### Backend
 Na raiz do projeto, siga as instruções abaixo:
 
     cd api
@@ -43,7 +53,7 @@ Para consultar os dados: /api/meds
 Para inserir os registros manualmente: /resources/pmvg-data/insert/
 
 
-### Frontend
+#### Frontend
 
 Na raiz do projeto, siga as instruções abaixo:
 
@@ -57,8 +67,18 @@ O servidor irá rodar na porta 9090.
 
 Basta abrir o navegador na url: http://localhost:9090
 
-### Atualizando os dados
+## Endpoints
 
-Basta baixar a planilha [PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos) e coloca-la no diretório
-api/data nomeada como pmvg.xls e acessar a url: http://localhost:9090/resources/pmvg-data/insert. Esse processo pode levar um bom tempo
-para ser finalizado.
+### GET api/meds
+#### ?med_substance=str&laboratory_name=str&laboratory_cnpj&term=str
+
+Este endpoint permite realizar buscas nas colunas de substância, nome do laboratório e cnpj.
+Também é possível realizar uma busca por similaridade em todas as colunas citadas 
+através do parâmetro __*term*__ da query string.
+
+### POST api/resources/pmvg-data/insert
+
+Este endpoint serve para atualizar o banco de dados. Para fazer isto basta baixar a planilha
+[PMVG.xls](https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos) e coloca-la no diretório
+api/data nomeada como pmvg.xls e acessar a url: http://localhost:9090/resources/pmvg-data/insert. Esse
+processo pode levar um bom tempo para ser finalizado.
