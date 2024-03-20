@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { MedRow } from '@/repositories/meds';
 import { MedsRepository} from "@/repositories/meds";
-import {reactive, ref, onMounted, computed} from "vue";
+import { reactive, ref, onMounted, computed, watch } from "vue";
 import Header from '@/components/atomic/molecules/navigation/Header.vue'
 import type { TableMetaData } from "@/components/atomic/organisms/table/Table.vue";
 import Table from '@/components/atomic/organisms/table/Table.vue'
 import ToastContainer from '@/components/atomic/molecules/ToastContainer.vue'
 import { useTableFiltersStore } from '@/stores/tableFilters';
+import { usePartialTableDataService } from "@/services/partiaTableData";
 
 defineProps<{
   iconSize: number
@@ -27,11 +28,21 @@ const { filters } = useTableFiltersStore()
 
 const toastContainer = ref<InstanceType<typeof ToastContainer> | null>(null)
 
+const { getStoredPartialTableData, storePartialTableData } = usePartialTableDataService()
+
+const partialTableData = getStoredPartialTableData()
+
 const tableData = reactive<TableData>({
   headers: ['Substância', 'Laboratório', 'Cnpj'],
   rows: [],
-  currentPage: 0,
+  currentPage: partialTableData.currentPage,
   totalPages: 0
+})
+
+watch(tableData, (newTableData: TableData) => {
+  storePartialTableData({
+    currentPage: newTableData.currentPage
+  })
 })
 
 const isTableLoading = ref(false)
@@ -76,7 +87,7 @@ function filterHandler(tableMetaData: TableMetaData) {
 
 onMounted(() => {
   setTableData({
-    page: FIRST_PAGE,
+    page: tableData.currentPage,
     filters
   })
 })
@@ -94,12 +105,12 @@ onMounted(() => {
       <ToastContainer ref="toastContainer"/>
 
       <Table
+          @changePage="setTableData"
+          @filter="filterHandler"
           :headers="tableData.headers"
           :rows="computedTableRows"
           :currentPage="tableData.currentPage"
           :totalPages="tableData.totalPages"
-          @changePage="setTableData"
-          @filter="filterHandler"
           :isLoading="isTableLoading"
       />
     </main>
