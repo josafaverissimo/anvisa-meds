@@ -163,9 +163,11 @@ function clearFilters() {
                   v-for="(cell, key) in cells"
                   :key="key"
                   :title="rowsTitle.data.get(loseLose(cell)) ?? cell"
-                  :class="rowsTitle.data.get(loseLose(cell)) !== undefined ? 'help' : ''"
+                  :class="rowsTitle.data.get(loseLose(cell)) !== undefined ? 'title' : ''"
               >
-                {{cell}}
+                <span>
+                  {{cell}}
+                </span>
               </td>
             </tr>
 
@@ -281,8 +283,8 @@ function clearFilters() {
         text-align: center;
         padding: var(--padding-sm) 0;
 
-        &.help {
-          cursor: help;
+        &.title span {
+          border-bottom: thin dotted var(--color-text);
         }
       }
 
